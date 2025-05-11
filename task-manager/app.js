@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use("/api/v1/tasks", taskRouter);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
