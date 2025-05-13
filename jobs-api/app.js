@@ -4,11 +4,12 @@ const express = require("express");
 const app = express();
 const jobsRouter = require("./src/routes/jobs.route");
 const userRouter = require("./src/routes/user.route");
+const authMiddleware = require("./src/middleware/auth.middleware");
 
 app.use(express.json());
 
-app.use("/api/v1/jobs", jobsRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/jobs", authMiddleware, jobsRouter);
 
 const port = process.env.PORT || 3000;
 

@@ -13,8 +13,6 @@ const registerUser = async (req, res) => {
         .json({ error: "User already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("hashedPassword", hashedPassword);
-
     const createdUser = await UserSchema.create({
       name,
       email,
@@ -30,7 +28,7 @@ const registerUser = async (req, res) => {
 
     return res.status(StatusCodes.OK).json({ user: userObj, token: token });
   } catch (error) {
-    console.log("error", error);
+    console.log("registerUserError", error);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: error.message });
@@ -61,7 +59,7 @@ const loginUser = async (req, res) => {
     });
     return res.status(StatusCodes.OK).json({ user: userObj, token: token });
   } catch (error) {
-    console.log("error", error);
+    console.log("loginUserError", error);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: error.message });
