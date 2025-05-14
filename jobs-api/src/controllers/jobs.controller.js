@@ -10,9 +10,7 @@ const getAllJobs = async (req, res) => {
     return res.send({ data: jobs });
   } catch (error) {
     console.log("getAllJobsError", error);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
@@ -21,14 +19,10 @@ const createJobs = async (req, res) => {
   const authUser = req.authUser;
   try {
     const job = await jobService.createJobs(name, company, authUser);
-    return res
-      .status(StatusCodes.CREATED)
-      .json({ message: "Job created successfully", data: job });
+    return res.status(StatusCodes.CREATED).json({ message: "Job created successfully", data: job });
   } catch (error) {
     console.log("createJobsError", error);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
