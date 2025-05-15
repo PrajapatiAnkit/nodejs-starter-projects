@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { make } = require("simple-body-validator");
+const ApiResponse = require("../response/api.response");
 
 const registerValidator = (req, res, next) => {
   const rules = {
@@ -10,7 +11,7 @@ const registerValidator = (req, res, next) => {
 
   const validator = make(req.body, rules);
   if (!validator.validate()) {
-    return res.status(StatusCodes.BAD_REQUEST).json({ errors: validator.errors().all() });
+    return ApiResponse.error(res, "Request validation failed", validator.errors().all(), StatusCodes.BAD_REQUEST);
   }
   next();
 };
